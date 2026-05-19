@@ -1,0 +1,22 @@
+#Q2) Input 2 strings concatinate them and store in another variable. then perform generally used string methods on it like
+#lower(), upper(), title(), swapcase(), capitalize(), casefold(), center(), count(), endswith(), find(), isalnum(), isdigit(), #isnumeric(), isspace(), replace()
+
+str1 = input("Enter first string: ")
+str2 = input("Enter second string: ")
+str3 = str1 + str2
+print(str3)
+print(str3.lower())
+print(str3.upper())
+print(str3.title())
+print(str3.swapcase())
+print(str3.capitalize())    
+print(str3.casefold())
+print(str3.center(80, '*'))
+print(str3.count('a'))
+print(str3.endswith('a'))
+print(str3.find('a'))
+print(str3.isalnum())
+print(str3.isdigit())
+print(str3.isnumeric())
+print(str3.isspace())
+print(str3.replace('a','b'))
