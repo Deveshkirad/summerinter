@@ -8,7 +8,7 @@ import requests
     "sea_level": 1007,
     "grnd_level": 960"""
 def weather_api(city):
-    api_key = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=90129cfe527292343e04016ca446eafa&units=metric"
+    api_key = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=#YOUR_API_KEY&units=metric"
     try:
         response = requests.get(api_key)
         response.raise_for_status()  # Check if the request was successful
