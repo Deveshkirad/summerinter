@@ -1,3 +1,5 @@
+#Q2) Try building today's game yourself
+
 #rock paper scissors game
 import random
 user_wins = 0
