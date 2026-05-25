@@ -12,7 +12,7 @@ import requests
     "sea_level": 1007,
     "grnd_level": 960"""
 def weather_api(city):
-    #c0310c3e6b093e54a1ad198ed7d07056
+    
     api_key = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=#YOUR_API_KEY&units=metric"
     try:
         response = requests.get(api_key)
