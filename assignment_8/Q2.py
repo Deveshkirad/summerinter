@@ -6,9 +6,15 @@
 
 import pandas as pd
 
-df1 = pd.DataFrame({'Id': [1, 2, 3, 4], 'Name': ['Devesh', 'Rohit', 'Satyarth', 'Shivam']})
+df1 = pd.DataFrame({
+    'Id': [1, 2, 3, 4],
+    'Name': ['Devesh', 'Rohit', 'Satyarth', 'Shivam']
+})
 
-df2 = pd.DataFrame({'Id': [3, 4, 5, 6], 'Age': [25, 30, 35, 40]})
+df2 = pd.DataFrame({
+    'Id': [3, 4, 5, 6], 
+    'Age': [25, 30, 35, 40]
+})
 
 df_inner = pd.merge(df1, df2, on='Id', how='inner')
 print("Inner Merge Result:")
