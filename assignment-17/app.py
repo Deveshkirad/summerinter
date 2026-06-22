@@ -1,35 +1,58 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
-import os
 
-spark = SparkSession.builder.appName("Sales Data Analysis").getOrCreate()
+# Create Spark Session
+spark = SparkSession.builder \
+    .appName("SalesDataFrameAssignment") \
+    .getOrCreate()
 
-df = spark.read.csv("sales_data.csv", header=True, inferSchema=True)
+spark.sparkContext.setLogLevel("ERROR")
 
-# 🔥 FIX: strip spaces from column names
-df = df.toDF(*[c.strip() for c in df.columns])
+# Read CSV
+df = spark.read.csv(
+    "data/sales.csv",
+    header=True,
+    inferSchema=True
+)
 
-print("\n===== Cleaned Columns =====")
-print(df.columns)
+# --------------------------------------------------
+# TASK 1
+# Sort products by sales descending
+# --------------------------------------------------
 
-df.show()
+print("\n===== Products Sorted By Sales =====")
 
-# Now this will work
-sorted_df = df.orderBy(col("sales").desc())
+sorted_df = df.orderBy(
+    col("sales").desc()
+)
+
 sorted_df.show()
 
+# --------------------------------------------------
+# TASK 2
+# Top 3 Products
+# --------------------------------------------------
+
+print("\n===== Top 3 Products =====")
+
 top3_df = sorted_df.limit(3)
+
 top3_df.show()
 
-filtered_df = df.filter(col("sales") > 80000)
-filtered_df.show()
+# --------------------------------------------------
+# TASK 3
+# Filter sales > 80000
+# --------------------------------------------------
 
-output_path = "output/filtered_sales.csv"
+high_sales_df = df.filter(
+    col("sales") > 80000
+)
 
-if os.path.exists(output_path):
-    import shutil
-    shutil.rmtree(output_path)
+high_sales_df.coalesce(1).write \
+    .mode("overwrite") \
+    .option("header", True) \
+    .csv("output/high_sales_products")
 
-filtered_df.coalesce(1).write.mode("overwrite").option("header", True).csv(output_path)
+print("\nFiltered products saved to output/high_sales_products")
 
 spark.stop()
